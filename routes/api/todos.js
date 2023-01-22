@@ -3,22 +3,24 @@
 const express = require('express')
 // Only the router non of the other app stuff
 const router = express.Router()
-const {dataController, apiController} = require('../../controllers/api/todos')
+const dataController= require('../../controllers/api/todos')
 
 
 
 //API Routes
 // API Routes
-// Index /api/fruits
-router.get('/', dataController.index, apiController.index)
-// Delete /api/fruits/:id
-router.delete('/:id', dataController.destroy, apiController.show)
-// Update /api/fruits/:id
-router.put('/:id', dataController.update, apiController.show)
-// Create /api/fruits
-router.post('/', dataController.create, apiController.show)
-// Show /api/fruits/:id
-router.get('/:id', dataController.show, apiController.show)
+// Index /api/todos
+router.get('/', dataController.indexNotComplete, dataController.jsonTodos)
+// Index /api/todos/completed
+router.get('/completed', dataController.indexComplete, dataController.jsonTodos)
+// Delete /api/todos/:id
+router.delete('/:id', dataController.destroy, dataController.jsonTodo)
+// Update /api/todos/:id
+router.put('/:id', dataController.update, dataController.jsonTodo)
+// Create /api/todos
+router.post('/', dataController.create, dataController.jsonTodo)
+// Show /api/todos/:id
+router.get('/:id', dataController.show, dataController.jsonTodo)
 
 
 module.exports = router
